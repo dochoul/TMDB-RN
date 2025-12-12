@@ -1,13 +1,24 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { RootStackParamList } from "../../App";
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const Header = () => {
+  const navigation = useNavigation<NavigationProp>();
+
+  const handleLogoPress = () => {
+    navigation.navigate("MovieList");
+  };
+
   return (
     <View style={styles.container}>
       {/* 왼쪽 로고 */}
-      <View style={styles.logoContainer}>
+      <TouchableOpacity style={styles.logoContainer} onPress={handleLogoPress}>
         <Text style={styles.logoText}>🎬 TMDB</Text>
-      </View>
+      </TouchableOpacity>
 
       {/* 오른쪽 프로필 사진 */}
       <TouchableOpacity style={styles.profileContainer}>
@@ -34,7 +45,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#1a1a2e",
   },
   logoContainer: {
-    flex: 1,
+    alignSelf: "flex-start",
   },
   logoText: {
     fontSize: 24,
