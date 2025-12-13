@@ -94,7 +94,7 @@ const MovieListScreen = () => {
   return (
     <View style={styles.container}>
       <Header />
-      <Text style={styles.header}>🎬인기 영화🍿🍿🍿🍿🍿🍿🍿</Text>
+      <Text style={styles.header}>🍿인기 영화</Text>
       <FlatList
         data={movies}
         renderItem={renderMovieItem}

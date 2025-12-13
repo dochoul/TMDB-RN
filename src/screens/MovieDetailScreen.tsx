@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  StyleSheet,
-  ActivityIndicator,
-  Dimensions,
-} from "react-native";
+import { View, Text, ScrollView, Image, StyleSheet, ActivityIndicator } from "react-native";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { getMovieDetails, MovieDetails, getPosterUrl, getBackdropUrl } from "../api/tmdbApi";
 import Header from "../components/Header";
@@ -19,9 +11,8 @@ type RootStackParamList = {
 
 type MovieDetailScreenRouteProp = RouteProp<RootStackParamList, "MovieDetail">;
 
-const { width } = Dimensions.get("window");
-const POSTER_WIDTH = width * 0.35;
-const POSTER_HEIGHT = POSTER_WIDTH * 1.5;
+const POSTER_WIDTH = 120;
+const POSTER_HEIGHT = 180;
 
 const MovieDetailScreen = () => {
   const route = useRoute<MovieDetailScreenRouteProp>();
