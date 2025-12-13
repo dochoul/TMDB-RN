@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
-  Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -20,10 +19,6 @@ type RootStackParamList = {
 };
 
 type MovieListScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, "MovieList">;
-
-const { width } = Dimensions.get("window");
-const POSTER_WIDTH = (width - 48) / 2; // 2열 그리드, 좌우 패딩 16*3 = 48
-const POSTER_HEIGHT = POSTER_WIDTH * 1.5; // 포스터 비율 2:3
 
 const MovieListScreen = () => {
   const navigation = useNavigation<MovieListScreenNavigationProp>();
@@ -105,6 +100,7 @@ const MovieListScreen = () => {
         renderItem={renderMovieItem}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
+        columnWrapperStyle={styles.row}
         contentContainerStyle={styles.listContainer}
         onEndReached={loadMore}
         onEndReachedThreshold={0.5}
@@ -141,8 +137,11 @@ const styles = StyleSheet.create({
   listContainer: {
     padding: 16,
   },
+  row: {
+    justifyContent: "space-between",
+  },
   movieCard: {
-    width: POSTER_WIDTH,
+    flex: 1,
     margin: 8,
     backgroundColor: "#1a1a2e",
     borderRadius: 12,
@@ -152,10 +151,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    maxWidth: "48%",
   },
   poster: {
     width: "100%",
-    height: POSTER_HEIGHT,
+    aspectRatio: 2 / 3,
     backgroundColor: "#2c2c54",
   },
   movieInfo: {
